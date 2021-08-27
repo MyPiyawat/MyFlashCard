@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="main_head_font_size">34sp</dimen>
+    <dimen name="head_font_size">20sp</dimen>
+    <dimen name="body_font_size">16sp</dimen>
+    <dimen name="subtitle_font_size">14sp</dimen>
+</resources>
