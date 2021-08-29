@@ -5,11 +5,13 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/Mia/MyFlashCard/app/src/main/res/drawable/baseline_arrow_back_ios_blue_700_24dp.xml" value="0.3351851851851852" />
         <entry key="..\:/AndroidStudioProjects/Mia/MyFlashCard/app/src/main/res/layout/activity_card.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/Mia/MyFlashCard/app/src/main/res/layout/activity_decks.xml" value="0.32653985507246375" />
         <entry key="..\:/AndroidStudioProjects/Mia/MyFlashCard/app/src/main/res/layout/activity_desk.xml" value="0.36277173913043476" />
         <entry key="..\:/AndroidStudioProjects/Mia/MyFlashCard/app/src/main/res/layout/activity_main_menu.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Mia/MyFlashCard/app/src/main/res/layout/content_main_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProjects/Mia/MyFlashCard/app/src/main/res/layout/fragment_first.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProjects/Mia/MyFlashCard/app/src/main/res/layout/fragment_second.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProjects/Mia/MyFlashCard/app/src/main/res/layout/item_deck.xml" value="0.3319746376811594" />
       </map>
     </option>
   </component>
