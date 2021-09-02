@@ -1,0 +1,32 @@
+[
+	{
+		"id": 0,
+		"name": "Food",
+		"color": "#5bcdfa",
+		"icon":"baseline_set_meal_white_36dp"
+	},
+	{
+		"id": 1,
+		"name": "Art and Entertainment",
+		"color": "#9667e0",
+		"icon":"baseline_music_note_white_36dp"
+	},
+	{
+		"id": 2,
+		"name": "Object",
+		"color": "#fcb75d",
+		"icon":"baseline_emoji_objects_white_36dp"
+	},
+	{
+		"id": 3,
+		"name": "Living thing",
+		"color": "#5dd39e",
+		"icon":"baseline_pets_white_36dp"
+	},
+	{
+		"id": 4,
+		"name": "Other",
+		"color": "#f26398",
+		"icon":"baseline_more_horiz_white_36dp"
+	}
+]

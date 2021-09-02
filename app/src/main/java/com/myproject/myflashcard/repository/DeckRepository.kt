@@ -2,8 +2,8 @@ package com.myproject.myflashcard.repository
 
 import android.app.Application
 import com.myproject.myflashcard.model.DeckModel
-import com.myproject.myflashcard.room.DeckDAO
-import com.myproject.myflashcard.room.DeckDatabase
+import com.myproject.myflashcard.room.deck.DeckDAO
+import com.myproject.myflashcard.room.deck.DeckDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

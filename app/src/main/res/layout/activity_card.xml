@@ -14,7 +14,6 @@
         app:layout_constraintGuide_begin="16dp" />
 
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/line_bottom"
         android:layout_width="wrap_content"
@@ -42,6 +41,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
     <FrameLayout
         android:id="@+id/lay_back"
         android:layout_width="wrap_content"
@@ -49,6 +49,7 @@
         app:layout_constraintStart_toStartOf="@+id/line_start"
         app:layout_constraintTop_toTopOf="@+id/line_top"
         tools:layout_editor_absoluteY="1dp">
+
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="wrap_content"
@@ -59,7 +60,7 @@
     </FrameLayout>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cv_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
@@ -67,66 +68,50 @@
         app:layout_constraintDimensionRatio="2:3"
         app:layout_constraintEnd_toEndOf="@id/line_end"
         app:layout_constraintStart_toStartOf="@+id/line_start"
-        app:layout_constraintTop_toBottomOf="@id/lay_back" />
+        app:layout_constraintTop_toBottomOf="@id/lay_back">
+
+        <ImageView
+            android:id="@+id/img_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+    </androidx.cardview.widget.CardView>
 
 
+    <com.google.android.material.textfield.TextInputLayout
 
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColorHint="@android:color/darker_gray"
+        app:boxBackgroundColor="@android:color/transparent"
 
-        <com.google.android.material.textfield.TextInputLayout
+        app:layout_constraintBottom_toTopOf="@+id/cv_accept"
+        app:layout_constraintEnd_toStartOf="@id/line_end"
+        app:layout_constraintStart_toEndOf="@id/line_start"
+        app:layout_constraintTop_toBottomOf="@id/line_center">
 
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:boxBackgroundColor="@android:color/transparent"
-            android:textColorHint="@android:color/darker_gray"
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Card's Answer"
+            android:inputType="text"
+            android:lines="1"
+            android:theme="@style/high_emphasis" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            app:layout_constraintBottom_toTopOf="@+id/cv_accept"
-            app:layout_constraintEnd_toStartOf="@id/line_end"
-            app:layout_constraintStart_toEndOf="@id/line_start"
-            app:layout_constraintTop_toBottomOf="@id/line_center"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:hint="Card's Answer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:lines="1"
-                android:theme="@style/high_emphasis"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
     <Button
-        style="@style/font_button"
         android:id="@+id/cv_accept"
+        style="@style/font_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Accept"
         app:cardBackgroundColor="?attr/colorPrimary"
         app:layout_constraintBottom_toTopOf="@id/line_bottom"
         app:layout_constraintEnd_toStartOf="@id/line_end"
         app:layout_constraintStart_toEndOf="@id/line_start"
-        android:text="Accept"
 
         />
-
-
-
-
-    <!--<androidx.cardview.widget.CardView
-        android:id="@+id/cv_accept"
-        android:layout_width="0dp"
-        android:layout_height="42dp"
-        app:cardBackgroundColor="?attr/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@id/line_bottom"
-        app:layout_constraintEnd_toStartOf="@id/line_end"
-        app:layout_constraintStart_toEndOf="@id/line_start">
-
-        <TextView
-            style="@style/font_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Accept"
-            />
-
-    </androidx.cardview.widget.CardView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

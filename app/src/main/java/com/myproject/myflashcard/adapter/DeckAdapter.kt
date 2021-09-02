@@ -1,14 +1,18 @@
 package com.myproject.myflashcard.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.myproject.myflashcard.R
+import com.myproject.myflashcard.model.DeckCategory
 import com.myproject.myflashcard.model.DeckModel
+import com.myproject.myflashcard.utils.DeckCategoryUtil
 
 class DeckAdapter (private val context: Context, private  val decks : List<DeckModel>?) : RecyclerView.Adapter<DeckAdapter.ViewHolder>() {
 
@@ -24,11 +28,25 @@ class DeckAdapter (private val context: Context, private  val decks : List<DeckM
         holder.nameTxt.text = deck.name
         holder.amountTxt.text = "amount : "+deck.quantity
 
-        holder.typeImg.setImageResource(R.drawable.baseline_arrow_back_ios_blue_700_24dp)
+
+        holder.nameTxt.text
+        getCategory(holder,deck.type)
+
+
     }
 
     override fun getItemCount(): Int {
         return decks?.size!!
+    }
+
+    private fun getCategory(holder: ViewHolder,position : Int)  {
+        //get JSon
+        val reader = DeckCategoryUtil(context)
+        var deckType : DeckCategory = reader.getDeckCategory(position)
+        holder.deckCV.setCardBackgroundColor(Color.parseColor(deckType.color))
+        var imgId : Int = context.resources.getIdentifier(deckType.icon,"drawable",context.packageName)
+
+        holder.typeImg.setImageResource(imgId)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
@@ -36,5 +54,6 @@ class DeckAdapter (private val context: Context, private  val decks : List<DeckM
         var nameTxt : TextView = itemView.findViewById(R.id.txt_name) as TextView
         var amountTxt : TextView = itemView.findViewById(R.id.txt_amount) as TextView
         var typeImg : ImageView = itemView.findViewById(R.id.img_type) as ImageView
+        var deckCV : CardView = itemView.findViewById(R.id.cv_deck) as CardView
     }
 }

@@ -6,13 +6,14 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "deck")
 data class DeckModel(
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "id") var id:Int? = null,
-
         @ColumnInfo(name = "name") var name:String,
 
         @ColumnInfo(name = "type") var type: Int,
 
         @ColumnInfo(name = "quantity") var quantity: Int
 )
+{
+        @PrimaryKey(autoGenerate = true)
+        @ColumnInfo(name = "id") var id:Int? = null
+}
 

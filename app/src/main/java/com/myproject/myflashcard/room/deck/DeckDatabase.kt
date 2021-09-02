@@ -1,4 +1,4 @@
-package com.myproject.myflashcard.room
+package com.myproject.myflashcard.room.deck
 
 import android.content.Context
 import androidx.room.Database
@@ -9,7 +9,7 @@ import com.myproject.myflashcard.model.DeckModel
 @Database(entities = [DeckModel::class], version = 1, exportSchema = false)
 abstract class DeckDatabase : RoomDatabase() {
 
-    abstract fun deckDao() :DeckDAO
+    abstract fun deckDao() : DeckDAO
 
     companion object {
 
