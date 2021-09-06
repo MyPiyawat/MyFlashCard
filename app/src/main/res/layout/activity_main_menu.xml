@@ -6,11 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".view.MainMenuActivity">
 
-
-    <TextView
-        android:id="@+id/textView"
-        style="@style/Header"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Desks" />
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/btn_play"
+            style="@style/font_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Play"
+            />
+        <Button
+            android:id="@+id/btn_edit"
+            style="@style/font_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            />
+    </LinearLayout>
 </RelativeLayout>

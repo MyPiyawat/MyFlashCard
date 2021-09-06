@@ -52,15 +52,20 @@ class CreateDeckActivity : AppCompatActivity() {
 
         })
 
+        //initial Button
         createButton = findViewById(R.id.btn_create)
-
         createButton.setOnClickListener {
-            val name : String = nameEditText.text.toString()
-            val type = categorySpinner.selectedItemPosition
-            val deck = DeckModel(name,type,0)
-
-            deckViewModel?.createDeck(deck)
-            Toast.makeText(applicationContext, "Success",Toast.LENGTH_SHORT).show()
+            createCard()
         }
     }
+
+
+    private fun createCard(){
+        val name : String = nameEditText.text.toString()
+        val type = categorySpinner.selectedItemPosition
+        val deck = DeckModel(name,type,0)
+        deckViewModel?.createDeck(deck)
+        finish()
+    }
+
 }

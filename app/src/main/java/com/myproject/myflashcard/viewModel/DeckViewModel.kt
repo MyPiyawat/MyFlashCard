@@ -15,4 +15,9 @@ class DeckViewModel(application: Application) : AndroidViewModel(application) {
     fun createDeck(deck: DeckModel) {
         repository.createDeck(deck)
     }
+
+    fun updateDeck(deck: DeckModel) {
+        repository.updateDeck(deck)
+    }
+
 }

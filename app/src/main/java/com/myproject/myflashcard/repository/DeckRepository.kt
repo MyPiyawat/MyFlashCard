@@ -4,10 +4,7 @@ import android.app.Application
 import com.myproject.myflashcard.model.DeckModel
 import com.myproject.myflashcard.room.deck.DeckDAO
 import com.myproject.myflashcard.room.deck.DeckDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class DeckRepository(application: Application) : CoroutineScope {
@@ -24,10 +21,20 @@ class DeckRepository(application: Application) : CoroutineScope {
 
     fun getDecks() = deckDAO?.getDecks()
 
-    fun createDeck(deckModel : DeckModel) {
-        launch { withContext(Dispatchers.IO){
-            deckDAO?.insertData(deckModel)
-        } }
+    fun createDeck(deckModel: DeckModel) {
+        launch {
+            withContext(Dispatchers.IO) {
+                deckDAO?.insertData(deckModel)
+            }
+        }
+    }
+
+    fun updateDeck(deckModel: DeckModel) {
+        launch {
+            withContext(Dispatchers.Main) {
+                deckDAO?.updateDeck(deckModel)
+            }
+        }
     }
 
 

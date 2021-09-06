@@ -8,7 +8,7 @@ import com.myproject.myflashcard.model.DeckModel
 @Dao
 interface CardDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCards(deckModel: DeckModel)
+    suspend fun insertCards(card: CardModel)
 
     @Query("Select * From card Where deck_id = :deckID")
     fun getCards(deckID:Int) : LiveData<List<CardModel>>
