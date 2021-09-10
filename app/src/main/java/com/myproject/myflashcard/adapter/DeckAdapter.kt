@@ -63,10 +63,9 @@ class DeckAdapter(
         var amountTxt: TextView = itemView.findViewById(R.id.txt_amount) as TextView
         var typeImg: ImageView = itemView.findViewById(R.id.img_type) as ImageView
         var deckCV: CardView = itemView.findViewById(R.id.cv_deck) as CardView
-
-
-
     }
+
+
 
     interface OnClickItemListener {
         fun onClick(deck :DeckModel)

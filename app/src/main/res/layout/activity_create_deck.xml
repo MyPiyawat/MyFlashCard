@@ -5,112 +5,112 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.CreateDeckActivity">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lay_action_bar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_arrow_back_ios_blue_700_24dp"
-            android:padding="8dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <TextView
-        android:id="@+id/txt_header"
-        style="@style/Header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create new deck"
-
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toBottomOf="@id/lay_action_bar"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        android:textColor="@color/black_87aph"
-        />
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear_layout"
-        app:layout_constraintTop_toBottomOf="@+id/txt_header"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="8dp"
-        >
-        <com.google.android.material.textfield.TextInputLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxBackgroundColor="@android:color/transparent"
-            android:textColorHint="@android:color/darker_gray"
-            android:layout_marginBottom="8dp"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_name"
-                android:hint="Deck's Name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:lines="1"
-                android:theme="@style/high_emphasis"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/txtView"
-            style="@style/high_emphasis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select category:"
-             />
-
-        <Spinner
-            android:id="@+id/spinner_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/black_60aph"
-            />
-        <Button
-            android:id="@+id/btn_create"
-            style="@style/font_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create"
-            android:layout_gravity="end"
-            />
-
-    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="8dp" />
+        app:layout_constraintGuide_percent="0.03" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="8dp" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom"
+        app:layout_constraintGuide_percent="0.97" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lay_action_bar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_ios_blue_700_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/txt_header"
+        style="@style/header_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="8dp" />
+        android:text="Create Deck"
+        android:textColor="@color/black_87aph"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/lay_action_bar" />
+
+    <Button
+        android:id="@+id/btn_create"
+        style="@style/font_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/dp_24"
+        android:enabled="false"
+        android:text="Create"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_category" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_category"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_name">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoComplete_category"
+            style="@style/subtitle_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="category"
+            android:inputType="none"
+            android:text="Select Deck Category"
+            android:textColor="@color/black_60aph" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:textColorHint="@android:color/darker_gray"
+
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/txt_header">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_name"
+            style="@style/subtitle_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Deck's Name"
+            android:inputType="text"
+            android:lines="1"
+            android:theme="@style/high_emphasis" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,19 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#95d5b2</color>
+
+    <color name="purple_1">#7868E6</color>
+    <color name="purple_2">#B8B5FF</color>
+    <color name="purple_3">#2d1674</color>
+    
+    <color name="blue_1">#E4FBFF</color>
+
+
+    <color name="color_background">#EDEEF7</color>
+
     <color name="black_87aph">#DE000000</color>
     <color name="black_60aph">#99000000</color>
+
+    <color name="white_87aph">#DEFFFFFF</color>
+    <color name="white_60aph">#99FFFFFF</color>
 </resources>

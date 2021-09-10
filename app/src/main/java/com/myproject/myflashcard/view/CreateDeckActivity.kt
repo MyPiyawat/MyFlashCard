@@ -1,10 +1,10 @@
 package com.myproject.myflashcard.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.myproject.myflashcard.R
@@ -14,58 +14,74 @@ import com.myproject.myflashcard.viewModel.DeckViewModel
 
 class CreateDeckActivity : AppCompatActivity() {
 
-    lateinit var categorySpinner : Spinner
-    private lateinit var nameEditText: TextInputEditText
-    lateinit var createButton : Button
+
+    private val createButton by lazy { findViewById<Button>(R.id.btn_create) }
     private var deckViewModel: DeckViewModel? = null
+    private var selectedPosition = -1
+    private var name = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_deck)
 
-        init()
+        initButton()
+        initEdittext()
+        initDropDown()
+
     }
 
-    private fun init(){
-        deckViewModel = ViewModelProvider(this).get(DeckViewModel::class.java)
-
-        //initial Spinner
-        val reader = DeckCategoryUtil(applicationContext)
-        var listOfItems = reader.getAllCategoryString()
-        categorySpinner = findViewById(R.id.spinner_category)
-        val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,listOfItems)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        categorySpinner.adapter = adapter
-
-        //initial Edit text
-        nameEditText = findViewById(R.id.edt_name)
-        nameEditText.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
+    private fun initEdittext() {
+        val nameEditText = findViewById<TextInputEditText>(R.id.edt_name)
+        nameEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                createButton.isEnabled = p0.toString().trim { it <= ' ' }.isNotEmpty()
+                name = p0.toString()
+                createButton.isEnabled =
+                    name.trim { it <= ' ' }.isNotEmpty().and(selectedPosition != -1)
             }
 
             override fun afterTextChanged(p0: Editable?) {}
 
         })
+    }
 
-        //initial Button
-        createButton = findViewById(R.id.btn_create)
+    private fun initDropDown() {
+        deckViewModel = ViewModelProvider(this).get(DeckViewModel::class.java)
+
+        val reader = DeckCategoryUtil(applicationContext)
+        val listOfItems = reader.getAllCategoryString()
+        val categoryAutoComplete = findViewById<AutoCompleteTextView>(R.id.autoComplete_category)
+        val adapter = ArrayAdapter(this, R.layout.item_category_dropdrown, listOfItems)
+        categoryAutoComplete.setAdapter(adapter)
+        categoryAutoComplete.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                selectedPosition = position
+                createButton.isEnabled =
+                    name.trim { it <= ' ' }.isNotEmpty()
+                        .and(selectedPosition != -1)
+
+            }
+
+    }
+
+    private fun initButton() {
+
+        val backImg = findViewById<ImageView>(R.id.img_back)
+        backImg.setOnClickListener { onBackPressed() }
+
         createButton.setOnClickListener {
             createCard()
         }
     }
 
 
-    private fun createCard(){
-        val name : String = nameEditText.text.toString()
-        val type = categorySpinner.selectedItemPosition
-        val deck = DeckModel(name,type,0)
+    private fun createCard() {
+
+        val deck = DeckModel(name, selectedPosition, 0)
         deckViewModel?.createDeck(deck)
         finish()
     }
+
 
 }

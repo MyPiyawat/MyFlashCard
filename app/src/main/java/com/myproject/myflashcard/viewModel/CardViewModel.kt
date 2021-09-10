@@ -17,4 +17,8 @@ class CardViewModel (application: Application) : AndroidViewModel(application) {
     fun removeCard(card : CardModel) {
         repository.removeCard(card)
     }
+
+    fun removeCardsByID(cards : List<Int>){
+        repository.removeCardsByID(cards)
+    }
 }

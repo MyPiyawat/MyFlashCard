@@ -1,9 +1,9 @@
 package com.myproject.myflashcard.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.myproject.myflashcard.R
 
 class MainMenuActivity : AppCompatActivity() {
@@ -16,8 +16,8 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        val playBtn : Button = findViewById(R.id.btn_play)
-        val editBtn : Button = findViewById(R.id.btn_edit)
+        val playBtn: CardView = findViewById(R.id.cv_play)
+        val editBtn: CardView = findViewById(R.id.cv_create)
 
         playBtn.setOnClickListener {
             startToDeck(0)

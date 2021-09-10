@@ -15,4 +15,7 @@ interface CardDAO {
 
     @Delete
     suspend fun deleteCard(card : CardModel)
+
+    @Query("Delete From card Where id In (:idList)")
+    fun deleteCardsByID(idList: List<Int>)
 }

@@ -1,0 +1,7 @@
+<TextView
+    style="@style/subtitle_text_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Decks"
+    android:padding="@dimen/dp_12"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

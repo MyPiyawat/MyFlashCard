@@ -36,6 +36,12 @@ class CardRepository(application: Application) : CoroutineScope {
         } }
     }
 
+    fun removeCardsByID(cards : List<Int>){
+        launch { withContext(Dispatchers.IO){
+            cardDAO?.deleteCardsByID(cards)
+        } }
+    }
+
 
 
 }

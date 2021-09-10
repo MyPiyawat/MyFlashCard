@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.myproject.myflashcard.R
 import com.myproject.myflashcard.adapter.CardAdapter
+import com.myproject.myflashcard.adapter.FlashCardAdapter
 import com.myproject.myflashcard.model.DeckModel
 import com.myproject.myflashcard.viewModel.CardViewModel
 import com.yuyakaido.android.cardstackview.*
@@ -29,7 +30,7 @@ class FlashCardActivity : AppCompatActivity(), CardStackListener {
     private val showButton by lazy { findViewById<CardStackView>(R.id.btn_show_answer) as Button }
     private val maskView by lazy { findViewById<CardStackView>(R.id.view_mask) as View }
     private lateinit var answerTxt: TextView
-    private lateinit var cardAdapter: CardAdapter
+    private lateinit var cardAdapter: FlashCardAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +49,7 @@ class FlashCardActivity : AppCompatActivity(), CardStackListener {
         val cardViewModel = ViewModelProvider(this).get(CardViewModel::class.java)
         cardViewModel.getCard(id!!)?.observe(this, {
             val randomIt = it.shuffled()
-            cardAdapter = CardAdapter(randomIt, true)
+            cardAdapter = FlashCardAdapter(randomIt)
             initCardStack()
             initButton()
         })

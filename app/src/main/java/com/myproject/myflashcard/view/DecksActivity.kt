@@ -70,7 +70,7 @@ class DecksActivity() : AppCompatActivity(), DeckAdapter.OnClickItemListener {
         } else {
             Intent(this, CardListActivity::class.java)
         }.apply {
-            putExtra(Companion.DECK_DATA, deck)
+            putExtra(DECK_DATA, deck)
 
         }
 

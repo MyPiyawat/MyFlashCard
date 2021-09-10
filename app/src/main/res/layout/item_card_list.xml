@@ -12,14 +12,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/dp_4"
+        app:cardCornerRadius="@dimen/dp_4"
+        app:layout_constraintDimensionRatio="W,4:3">
 
-        app:layout_constraintDimensionRatio="W,3:2"
-        android:layout_margin="8dp"
-        >
-        <ImageView
-            android:id="@+id/img_card"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+            <View
+                android:id="@+id/lay_masked"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="#4D000000" />
+
+            <ImageView
+                android:id="@+id/img_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
+                app:srcCompat="@drawable/round_check_circle_purple_24dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.cardview.widget.CardView>
 

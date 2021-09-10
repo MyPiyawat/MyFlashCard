@@ -12,8 +12,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="W,2:3"
-            android:layout_margin="8dp"
+            app:layout_constraintDimensionRatio="W,3:4"
+            app:cardCornerRadius="@dimen/dp_12"
+            app:cardElevation="0dp"
             >
             <ImageView
                 android:id="@+id/img_card"
