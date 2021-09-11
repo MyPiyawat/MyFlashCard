@@ -7,6 +7,7 @@
 	<dimen name="main_title_font_size">42sp</dimen>
 	
 	<!--Size-->
+	<dimen name="dp_130">130dp</dimen>
 	<dimen name="dp_64">64dp</dimen>
 	<dimen name="dp_48">48dp</dimen>
 	<dimen name="dp_36">36dp</dimen>

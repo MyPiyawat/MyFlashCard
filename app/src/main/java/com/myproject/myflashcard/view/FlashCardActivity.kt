@@ -1,36 +1,34 @@
 package com.myproject.myflashcard.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.myproject.myflashcard.R
-import com.myproject.myflashcard.adapter.CardAdapter
 import com.myproject.myflashcard.adapter.FlashCardAdapter
 import com.myproject.myflashcard.model.DeckModel
+import com.myproject.myflashcard.model.ScoreModel
+import com.myproject.myflashcard.utils.ScoreUtil
 import com.myproject.myflashcard.viewModel.CardViewModel
 import com.yuyakaido.android.cardstackview.*
-
-import java.util.*
 
 
 class FlashCardActivity : AppCompatActivity(), CardStackListener {
 
     private val manager by lazy { CardStackLayoutManager(this, this) }
     private val cardStackView by lazy { findViewById<CardStackView>(R.id.card_stack_view) }
-    private val showButton by lazy { findViewById<CardStackView>(R.id.btn_show_answer) as Button }
-    private val maskView by lazy { findViewById<CardStackView>(R.id.view_mask) as View }
+    private val maskView by lazy { findViewById<ConstraintLayout>(R.id.lay_masked) }
     private lateinit var answerTxt: TextView
     private lateinit var cardAdapter: FlashCardAdapter
+    private var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,10 +79,11 @@ class FlashCardActivity : AppCompatActivity(), CardStackListener {
             cardStackView.swipe()
         }
 
-        showButton.setOnClickListener {
-            showButton.isGone = true
+        maskView.setOnClickListener {
             maskView.isGone = true
             setUpAnswer()
+
+
         }
     }
 
@@ -119,17 +118,40 @@ class FlashCardActivity : AppCompatActivity(), CardStackListener {
         }
     }
 
+    private fun getScoreDecorate(): ScoreModel {
+        val rate = (score * 10.0) / cardAdapter.itemCount
+
+        val reader = ScoreUtil(applicationContext)
+
+        return reader.getData(rate.toFloat())
+    }
+
 
     override fun onCardDragging(direction: Direction?, ratio: Float) {
 
     }
 
     override fun onCardSwiped(direction: Direction?) {
-
-        showButton.isVisible = true
         maskView.isVisible = true
+        val direct = direction?.ordinal
+
+        if (direct == 1) {
+            score++
+        }
 
 
+        if (manager.topPosition == cardAdapter.itemCount) {
+            openDialog()
+        }
+
+
+    }
+
+    private fun openDialog() {
+        val scoreDec = getScoreDecorate()
+        OverviewDialog.newInstance(score, cardAdapter.itemCount, scoreDec)
+            .apply { onOkClickListener = { finish() } }
+            .show(supportFragmentManager, "")
     }
 
     override fun onCardRewound() {
@@ -144,6 +166,7 @@ class FlashCardActivity : AppCompatActivity(), CardStackListener {
     }
 
     override fun onCardDisappeared(view: View?, position: Int) {
+
 
     }
 }

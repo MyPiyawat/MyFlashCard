@@ -4,4 +4,5 @@
     <dimen name="caption_font_size">12sp</dimen>
     <dimen name="header_font_size">24sp</dimen>
     <dimen name="main_title_font_size">40sp</dimen>
+    <dimen name="dp_130">130dp</dimen>
 </resources>

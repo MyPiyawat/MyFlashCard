@@ -1,14 +1,12 @@
 package com.myproject.myflashcard.view
 
-import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -68,9 +66,7 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnLongClickItemListene
         cardViewModel?.getCard(id!!)?.observe(this, Observer<List<CardModel>> {
             this.showAllCards(it)
         })
-
     }
-
     private fun deleteItem() {
         val selectedCards = cardAdapter.getSelectedItem()
         cardViewModel?.removeCardsByID(selectedCards)
