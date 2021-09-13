@@ -37,5 +37,13 @@ class DeckRepository(application: Application) : CoroutineScope {
         }
     }
 
+    fun deleteDeck(deckModel: DeckModel){
+        launch {
+            withContext(Dispatchers.IO){
+                deckDAO?.deleteDeck(deckModel)
+            }
+        }
+    }
+
 
 }

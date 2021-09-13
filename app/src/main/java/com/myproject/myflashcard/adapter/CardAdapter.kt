@@ -59,9 +59,10 @@ class CardAdapter(
 
 
         holder.itemView.setOnLongClickListener {
-            beginStart()
+
             listener.onLongClick()
-            onMarkSelectedItem(position)
+            changeMode()
+            onSelectedItem(position)
 
         }
 
@@ -72,25 +73,21 @@ class CardAdapter(
     }
 
     fun changeMode() {
-        selectedList.clear()
-        isSelectMode = false
+        beginStart()
+        isSelectMode = !isSelectMode
         this.notifyDataSetChanged()
+
     }
 
-    private fun onSelectedItem(position: Int) {
+    private fun onSelectedItem(position: Int): Boolean {
         if (isSelectMode) {
             selectedList[position] = !selectedList[position]
             this.notifyDataSetChanged()
         }
-    }
-
-    private fun onMarkSelectedItem(position: Int): Boolean {
-        isSelectMode = true
-        selectedList[position] = true
-        this.notifyDataSetChanged()
 
         return true
     }
+
 
     private fun beginStart() {
         selectedList.clear()

@@ -20,4 +20,8 @@ class DeckViewModel(application: Application) : AndroidViewModel(application) {
         repository.updateDeck(deck)
     }
 
+    fun deleteDeck(deck: DeckModel){
+        repository.deleteDeck(deck)
+    }
+
 }

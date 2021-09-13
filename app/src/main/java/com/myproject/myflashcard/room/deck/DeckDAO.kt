@@ -2,6 +2,7 @@ package com.myproject.myflashcard.room.deck
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.myproject.myflashcard.model.CardModel
 import com.myproject.myflashcard.model.DeckModel
 
 @Dao
@@ -15,4 +16,7 @@ interface DeckDAO {
 
     @Update
     suspend fun updateDeck(deckModel: DeckModel)
+
+    @Delete
+    suspend fun deleteDeck(deck : DeckModel)
 }

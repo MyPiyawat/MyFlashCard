@@ -8,7 +8,7 @@
 	{
 		"id": 1,
 		"name": "Art and Entertainment",
-		"color": "#9667e0",
+		"color": "#f26398",
 		"icon":"baseline_music_note_white_36dp"
 	},
 	{
@@ -25,8 +25,15 @@
 	},
 	{
 		"id": 4,
+		"name": "Science & Technology",
+		"color": "#9667e0",
+		"icon":"baseline_science_white_36dp"
+	},
+
+	{
+		"id": 5,
 		"name": "Other",
-		"color": "#f26398",
+		"color": "#a5a58d",
 		"icon":"baseline_more_horiz_white_36dp"
 	}
 ]

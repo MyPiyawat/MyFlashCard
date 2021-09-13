@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -27,28 +28,32 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnLongClickItemListene
     private var cardViewModel: CardViewModel? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var cardAdapter: CardAdapter
-    private val initDeck by lazy { intent.getSerializableExtra(DECK_DATA) as DeckModel }
+    private lateinit var initDeck: DeckModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_list)
 
+        initDeck = intent.getSerializableExtra(DECK_DATA) as DeckModel
+
         init()
+        initButton()
+        initRecyclerView()
     }
 
-    private fun init() {
-
-
-        cardViewModel = ViewModelProvider(this).get(CardViewModel::class.java)
-
-        //initial header
-        var headerTxt: TextView = findViewById(R.id.txt_header)
-        val name = initDeck.name
-        headerTxt.text = "$name's Card"
-
-        //initial Button
+    private fun initRecyclerView() {
         val id = initDeck.id
+
+        //initial Grid View
+        recyclerView = findViewById(R.id.recyclerView_cards)
+        cardViewModel?.getCard(id!!)?.observe(this, Observer<List<CardModel>> {
+            this.showAllCards(it)
+        })
+
+    }
+
+    private fun initButton() {
         val addImg = findViewById<FloatingActionButton>(R.id.btn_add)
         addImg.setOnClickListener { openToAddCard() }
 
@@ -59,14 +64,75 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnLongClickItemListene
         cancelTxt.setOnClickListener { onBackPressed() }
 
         val deleteImg = findViewById<ImageView>(R.id.img_delete)
-        deleteImg.setOnClickListener { onCreateAlertDialog() }
 
-        //initial Grid View
-        recyclerView = findViewById(R.id.recyclerView_cards)
-        cardViewModel?.getCard(id!!)?.observe(this, Observer<List<CardModel>> {
-            this.showAllCards(it)
-        })
+        deleteImg.setOnClickListener {
+
+            if (cardAdapter.getSelectedItem().isNotEmpty()) {
+                onCreateDeleteDialog()
+            }
+        }
+
+        val moreImg = findViewById<ImageView>(R.id.img_more)
+        moreImg.setOnClickListener { onCreateMoreDialog() }
+
     }
+
+    private fun init() {
+        cardViewModel = ViewModelProvider(this).get(CardViewModel::class.java)
+        //initial header
+        var headerTxt: TextView = findViewById(R.id.txt_header)
+        val name = initDeck.name
+        headerTxt.text = "$name's Card"
+
+    }
+
+    private fun onCreateMoreDialog() {
+        val size = cardAdapter.itemCount
+        val items = if (size <= 0) {
+            arrayOf("Edit Deck", "Delete Deck")
+        } else {
+            arrayOf("Edit Deck", "Delete Card")
+        }
+
+
+        val builder = AlertDialog.Builder(this)
+        with(builder) {
+            setItems(items) { _, which ->
+                if (items[which] == items[0]) {
+                    onUpdateDeck()
+                } else if (items[which] == items[1]) {
+                    if(size <= 0){
+                        onDeleteDeck()
+                    }
+                    else {
+                        cardAdapter.changeMode()
+                        true.toSelectedMode()
+                    }
+                }
+            }
+
+            show()
+        }
+
+    }
+
+    private fun onDeleteDeck() {
+        val deckViewModel = ViewModelProvider(this).get(DeckViewModel::class.java)
+        deckViewModel.deleteDeck(initDeck)
+        finish()
+
+    }
+
+    private fun onUpdateDeck() {
+        val intent =
+            Intent(this, CreateDeckActivity::class.java).apply {
+                putExtra(DECK_ID, initDeck.id)
+                putExtra(DECK_DATA, initDeck)
+            }
+        updateResult.launch(intent)
+    }
+
+
     private fun deleteItem() {
         val selectedCards = cardAdapter.getSelectedItem()
         cardViewModel?.removeCardsByID(selectedCards)
@@ -133,16 +199,26 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnLongClickItemListene
         }
     }
 
-    private fun onCreateAlertDialog(){
+    private fun onCreateDeleteDialog() {
         val builder = AlertDialog.Builder(this)
-        with(builder){
+        with(builder) {
             setTitle("Are you sure?")
             setMessage("Do you want to delete these cards?")
-            setPositiveButton("Cancel") { _, _ -> finish() }
+            setPositiveButton("Cancel") { dialog, _ -> dialog.dismiss() }
             setNegativeButton("Delete") { _, _ -> deleteItem() }
             show()
         }
     }
+
+    private val updateResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                val data = it.data
+                val deck = data?.getSerializableExtra("result") as DeckModel
+                initDeck = deck
+                init()
+            }
+        }
 
 
 }

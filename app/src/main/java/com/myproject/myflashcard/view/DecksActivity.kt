@@ -1,9 +1,9 @@
 package com.myproject.myflashcard.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -17,32 +17,22 @@ import com.myproject.myflashcard.viewModel.DeckViewModel
 
 class DecksActivity() : AppCompatActivity(), DeckAdapter.OnClickItemListener {
 
-    private lateinit var addDeck: ImageView
+
     private lateinit var deckAdapter: DeckAdapter
     private lateinit var recyclerView: RecyclerView
     private var deckViewModel: DeckViewModel? = null
-    private var type = -1
+    private val type by lazy { intent.getIntExtra(MainMenuActivity.TYPE_MESSAGE, -1) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_decks)
 
-        init()
+        initButton()
+        initGridView()
     }
 
-    private fun init() {
-        //initial
-        type = intent.getIntExtra(MainMenuActivity.TYPE_MESSAGE, -1)
-
-        //initial grid View
-        deckViewModel = ViewModelProvider(this).get(DeckViewModel::class.java)
-        recyclerView = findViewById(R.id.recyclerView)
-        deckViewModel?.getDecks()
-            ?.observe(this, Observer<List<DeckModel>> { this.showAllDecks(it) })
-
-
-        //initial icon create deck
-        addDeck = findViewById(R.id.img_add_deck)
+    private fun initButton() {
+        val addDeck = findViewById<ImageView>(R.id.img_add_deck)
         if (type == 0) {
             addDeck.isGone = true
         } else {
@@ -53,6 +43,18 @@ class DecksActivity() : AppCompatActivity(), DeckAdapter.OnClickItemListener {
             }
         }
 
+        val backImg = findViewById<ImageView>(R.id.img_back)
+        backImg.setOnClickListener { onBackPressed() }
+
+
+    }
+
+    private fun initGridView() {
+        //initial grid View
+        deckViewModel = ViewModelProvider(this).get(DeckViewModel::class.java)
+        recyclerView = findViewById(R.id.recyclerView)
+        deckViewModel?.getDecks()
+            ?.observe(this, Observer<List<DeckModel>> { this.showAllDecks(it) })
 
     }
 
