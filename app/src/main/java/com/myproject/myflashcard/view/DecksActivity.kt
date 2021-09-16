@@ -54,8 +54,26 @@ class DecksActivity() : AppCompatActivity(), DeckAdapter.OnClickItemListener {
         deckViewModel = ViewModelProvider(this).get(DeckViewModel::class.java)
         recyclerView = findViewById(R.id.recyclerView)
         deckViewModel?.getDecks()
-            ?.observe(this, Observer<List<DeckModel>> { this.showAllDecks(it) })
+            ?.observe(this, Observer<List<DeckModel>> {
+                val data = if (type == 0) {
+                    removeQuantityEmpty(it as MutableList<DeckModel>)
+                } else {
+                    it
+                }
 
+                showAllDecks(data)
+            })
+    }
+
+    private fun removeQuantityEmpty(data: MutableList<DeckModel>): List<DeckModel> {
+        
+        for (i in data.indices) {
+            if (data[i].quantity == 0) {
+                data.removeAt(i)
+            }
+        }
+
+        return data
     }
 
     private fun showAllDecks(data: List<DeckModel>) {
@@ -65,6 +83,7 @@ class DecksActivity() : AppCompatActivity(), DeckAdapter.OnClickItemListener {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = deckAdapter
     }
+
 
     override fun onClick(deck: DeckModel) {
         val intent = if (type == 0) {
