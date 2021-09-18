@@ -11,15 +11,14 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import com.myproject.myflashcard.R
-import com.myproject.myflashcard.model.ScoreModel
-import org.w3c.dom.Text
+import com.myproject.myflashcard.utils.Score
 import java.text.DecimalFormat
 
 class OverviewDialog : DialogFragment() {
 
     private var points: Int = 0
     private var size: Int = 0
-    private lateinit var scoreModel : ScoreModel
+    private lateinit var scoreModel: Score
     var onOkClickListener: (() -> Unit)? = null
 
 
@@ -76,10 +75,11 @@ class OverviewDialog : DialogFragment() {
 
 
     companion object {
-        fun newInstance(points: Int, size: Int, scoreModel: ScoreModel): OverviewDialog = OverviewDialog().apply {
-            this.points = points
-            this.size = size
-            this.scoreModel = scoreModel
-        }
+        fun newInstance(points: Int, size: Int, scoreModel: Score): OverviewDialog =
+            OverviewDialog().apply {
+                this.points = points
+                this.size = size
+                this.scoreModel = scoreModel
+            }
     }
 }

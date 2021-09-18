@@ -9,13 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.myproject.myflashcard.R
 import com.myproject.myflashcard.model.DeckModel
-import com.myproject.myflashcard.utils.DeckCategoryUtil
 import com.myproject.myflashcard.view.DecksActivity.Companion.DECK_DATA
 import com.myproject.myflashcard.view.DecksActivity.Companion.DECK_ID
 import com.myproject.myflashcard.viewModel.DeckViewModel
-import android.app.Activity
-
-
+import com.myproject.myflashcard.utils.DeckCategory
 
 
 class CreateDeckActivity : AppCompatActivity() {
@@ -77,15 +74,18 @@ class CreateDeckActivity : AppCompatActivity() {
     private fun initDropDown() {
         deckViewModel = ViewModelProvider(this).get(DeckViewModel::class.java)
 
-        val reader = DeckCategoryUtil(applicationContext)
-        val listOfItems = reader.getAllCategoryString()
+        val listOfItems : MutableList<String> = mutableListOf()
+
+        for(item in DeckCategory.values()){
+            listOfItems.add(item.categoryName)
+        }
 
         if (selectedPosition != -1) {
             categoryAutoComplete.setText(listOfItems[selectedPosition])
         }
 
 
-        val adapter = ArrayAdapter(this, R.layout.item_category_dropdrown, listOfItems)
+        val adapter = ArrayAdapter(this, R.layout.item_category_dropdrown,listOfItems)
         categoryAutoComplete.setAdapter(adapter)
         categoryAutoComplete.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->

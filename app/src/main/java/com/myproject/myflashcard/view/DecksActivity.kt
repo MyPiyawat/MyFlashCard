@@ -66,7 +66,7 @@ class DecksActivity() : AppCompatActivity(), DeckAdapter.OnClickItemListener {
     }
 
     private fun removeQuantityEmpty(data: MutableList<DeckModel>): List<DeckModel> {
-        
+
         for (i in data.indices) {
             if (data[i].quantity == 0) {
                 data.removeAt(i)

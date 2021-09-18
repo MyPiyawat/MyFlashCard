@@ -22,7 +22,7 @@ import com.myproject.myflashcard.model.CardModel
 import com.myproject.myflashcard.viewModel.CardViewModel
 
 
-class CardActivity : AppCompatActivity() {
+class  CardActivity : AppCompatActivity() {
 
     private val imageView by lazy { findViewById<ImageView>(R.id.img_data) }
     private val addImageLayout by lazy { findViewById<ConstraintLayout>(R.id.lay_add_image) }

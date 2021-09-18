@@ -5,15 +5,13 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.myproject.myflashcard.R
-import com.myproject.myflashcard.model.DeckCategory
 import com.myproject.myflashcard.model.DeckModel
-import com.myproject.myflashcard.utils.DeckCategoryUtil
+import com.myproject.myflashcard.utils.DeckCategory
 
 class DeckAdapter(
     private val context: Context,
@@ -34,29 +32,21 @@ class DeckAdapter(
         holder.nameTxt.text = deck.name
         holder.amountTxt.text = "amount : " + deck.quantity
 
-
         holder.nameTxt.text
-        getCategory(holder, deck.type)
 
-        holder.deckCV.setOnClickListener{listener.onClick(deck)}
+        val categories = DeckCategory.values()
+        val category = categories[deck.type]
+
+        holder.deckCV.setCardBackgroundColor(Color.parseColor(category.color))
+        holder.typeImg.setImageResource(category.icon)
+
+
+        holder.deckCV.setOnClickListener { listener.onClick(deck) }
     }
 
     override fun getItemCount(): Int {
         return decks.size
     }
-
-    private fun getCategory(holder: ViewHolder, position: Int) {
-        //get JSon
-        val reader = DeckCategoryUtil(context)
-        val deckType: DeckCategory = reader.getDeckCategory(position)
-        holder.deckCV.setCardBackgroundColor(Color.parseColor(deckType.color))
-        val imgId: Int =
-            context.resources.getIdentifier(deckType.icon, "drawable", context.packageName)
-
-        holder.typeImg.setImageResource(imgId)
-
-    }
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var nameTxt: TextView = itemView.findViewById(R.id.txt_name) as TextView

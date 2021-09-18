@@ -1,8 +1,18 @@
 <resources>
+    <!--Font-->
     <dimen name="body_font_size">16sp</dimen>
     <dimen name="subtitle_font_size">14sp</dimen>
     <dimen name="caption_font_size">12sp</dimen>
-    <dimen name="header_font_size">24sp</dimen>
-    <dimen name="main_title_font_size">40sp</dimen>
+    <dimen name="header_font_size">34sp</dimen>
+    <dimen name="main_title_font_size">42sp</dimen>
+
+    <!--Size-->
     <dimen name="dp_130">130dp</dimen>
+    <dimen name="dp_64">64dp</dimen>
+    <dimen name="dp_48">48dp</dimen>
+    <dimen name="dp_36">36dp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
 </resources>

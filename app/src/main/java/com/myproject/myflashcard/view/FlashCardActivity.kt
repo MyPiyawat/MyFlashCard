@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.myproject.myflashcard.R
 import com.myproject.myflashcard.adapter.FlashCardAdapter
 import com.myproject.myflashcard.model.DeckModel
-import com.myproject.myflashcard.model.ScoreModel
-import com.myproject.myflashcard.utils.ScoreUtil
+import com.myproject.myflashcard.utils.Score
 import com.myproject.myflashcard.viewModel.CardViewModel
 import com.yuyakaido.android.cardstackview.*
 
@@ -118,13 +117,14 @@ class FlashCardActivity : AppCompatActivity(), CardStackListener {
         }
     }
 
-    private fun getScoreDecorate(): ScoreModel {
-        val rate = (score * 10.0) / cardAdapter.itemCount
-
-        val reader = ScoreUtil(applicationContext)
-
-        return reader.getData(rate.toFloat())
-    }
+    private fun getScoreDecorate(): Score =
+        when ((score * 10.0f) / cardAdapter.itemCount) {
+            in Score.Poor.start..Score.Poor.end -> Score.Poor
+            in Score.Fair.start..Score.Fair.end -> Score.Fair
+            in Score.Good.start..Score.Good.end -> Score.Good
+            in Score.Excellent.start..Score.Excellent.end -> Score.Excellent
+            else -> Score.Fair
+        }
 
 
     override fun onCardDragging(direction: Direction?, ratio: Float) {
